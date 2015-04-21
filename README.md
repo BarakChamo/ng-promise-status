@@ -1,25 +1,35 @@
-# Bower Publishable Angular Directive Boilerplate
+# ng-promise-status
+A collection of promise-aware Angular.js directives and UI elements
+=======================
 
-This is a simple AngularJS directive boilerplate to help you start your own AngularJS directive and publish it in Bower and NPM.
-This readme file itself is a boilerplate.
+### Installation
 
-#### Using the boilerplate
-Clone the project and install dependencies, then use Gulp to start the prject.
-```shell
-git clone git@github.com:mohsen1/angular-directive-boilerplate.git my-directive
-cd my-directive
-npm install
-bower install
-gulp serve
-```
-#### Install via NPM or bower
+Install via bower
 
 ```shell
-npm install angular-directive-boilerplate
+bower install ng-promise-status
 ```
+
+### Usage
+
+Add it as a dependency to your app and then use the directive in your HTML files.
+
+More documentation and examples coming soon.
+
+### Development
+
+Install Gulp via npm if you don't have it
 ```shell
-bower install angular-directive-boilerplate
+npm install -g gulp
 ```
+
+### Available commands
+
+* `gulp`: build and test the project
+* `gulp build`: build the project and make new files in`dist`
+* `gulp serve`: start a server to serve the demo page and launch a browser then watches for changes in `src` files to reload the page
+* `gulp test`: run tests
+* `gulp serve-test`: runs tests and keep test browser open for development. Watches for changes in source and test files to re-run the tests
 
 ### License
 MIT
