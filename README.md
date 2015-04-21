@@ -10,6 +10,12 @@ Install via bower
 bower install ng-promise-status
 ```
 
+or via npm
+
+```shell
+npm install ng-promise-status
+```
+
 ### Usage
 
 Add it as a dependency to your app and then use the directive in your HTML files.
