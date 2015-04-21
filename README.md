@@ -1,6 +1,6 @@
 # ng-promise-status
 ###### A collection of promise-aware Angular.js directives and UI elements
-=======================
+
 
 ### Installation
 
