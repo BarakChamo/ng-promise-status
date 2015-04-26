@@ -1,7 +1,7 @@
 /*!
  * ng-promise-status
  * 
- * Version: 0.0.1 - 2015-04-21T16:40:47.639Z
+ * Version: 0.0.1 - 2015-04-23T09:04:04.529Z
  * License: MIT
  */
 
@@ -22,31 +22,49 @@ angular.module('ngPromiseStatus', [])
       options: '='
     },
     link: function (scope, element, attrs, controller, transclude) {
+      /*
+        Scope properties
+      */ 
+
       // Set directive configuration defaults
       scope.$config = {
         // Status classes
-        success_class: scope.options  && scope.options.success_class  || 'success',
-        error_class:   scope.options  && scope.options.error_class    || 'error',
-        progress_class: scope.options && scope.options.progress_class || 'inprogress',
+        success_class:  'success',
+        error_class:    'error',
+        progress_class: 'inprogress',
+        idle_class: 'idle',
 
         // Disable on progress
-        progress_disable: scope.options && scope.options.progress_disable || true
+        progress_disable: true,
+
+        // Timeout for clearing status (back to idle) - 0 is disabled, keeps the status
+        delay: 0
       };
 
+      // Apply custom configuration
+      angular.extend(scope.$config, scope.options);
+
       // Initialize exposed scope properties
-      scope.$status = 'prestine';
-      scope.$class  = '';
+      scope.$status = 'idle';
+      scope.$class  = scope.$config.idle_class;
+
+      // Status Button ng-click handler
+      scope.statusButtonClick = function($event){
+        $timeout(function(){
+          setPromise(scope.promise);
+        });
+      };
+
+
+      /*
+        Private Methods
+      */ 
 
       function setPromise(promise){
-        console.log('SET PROMISE');
         var p;
 
         // Reset exposed scope values
-        scope.$status  = 'inprogress';
-        scope.$class   = scope.$config.progress_class;
-        scope.$success = false;
-        scope.$done    = false;
-        scope.$value   = undefined;
+        setProps('inprogress', scope.$config.progress_class, false, undefined);
 
         // Check for supported types
         p = promise.propertyIsEnumerable('promise') ? promise.promise : promise;
@@ -58,36 +76,35 @@ angular.module('ngPromiseStatus', [])
 
       // Handle sucessful promises
       function success(value){
-        scope.$status  = 'success';
-        scope.$class   = scope.$config.success_class;
-        scope.$success = true;
-        scope.$done    = true;
-        scope.$value   = scope.promise instanceof Array ? value : value[0];
-
-        console.log(value);
+        setProps('success', scope.$config.success_class, true, scope.promise instanceof Array ? value : value[0]);
       }
 
       // Handle promise errors
       function error(err){
-        scope.$status  = 'error';
-        scope.$class   = scope.$config.error_class;
-        scope.$success = false;
-        scope.$done    = true;
-        scope.$value   = err;
-
-        console.log(err);
+        setProps('error', scope.$config.error_class, true, err);
       }
 
+      // Handle promise notify (progress)
       function progress(value){
         scope.$value = value;
       }
 
-      // Status Button ng-click handler
-      scope.statusButtonClick = function($event){
-        $timeout(function(){
-          setPromise(scope.promise);
-        });
-      };
+      // Update exposed scope properties
+      function setProps(status, className, done, value){
+        scope.$status  = status;
+        scope.$class   = className;
+        scope.$done    = done;
+        scope.$value   = value;
+
+        // If done and delay is set, set a timeout to clear the class
+        if (scope.$config.delay > 0) {
+          $timeout(function(){
+            scope.$status = 'idle';
+            scope.$class  = '';            
+          }, scope.$config.delay);
+        }
+      }
+
 
       // Transclude the button's content
       //- Transclusion is done here and not with ngTransclude 
@@ -99,4 +116,4 @@ angular.module('ngPromiseStatus', [])
     }
   };
 }]);
-angular.module("ngPromiseStatus").run(["$templateCache", function($templateCache) {$templateCache.put("directive.html","<button class=\"status-button\" ng-click=\"; statusButtonClick($event)\" ng-class=\"$class\" ng-disabled=\"$config.progress_disable && $status === \'inprogress\'\"><span class=\"status\">status</span></button>");}]);
+angular.module("ngPromiseStatus").run(["$templateCache", function($templateCache) {$templateCache.put("directive.html","<button class=\"status-button\" ng-click=\"; statusButtonClick($event)\" ng-class=\"$class\" ng-disabled=\"$config.progress_disable && $status === \'inprogress\'\"></button>");}]);

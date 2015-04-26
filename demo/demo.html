@@ -2,7 +2,7 @@
 <html ng-app="demo">
   <head>
     <meta charset="utf-8">
-    <title>AngularJS directive demo</title>
+    <title>ngPromiseStatus by Barak Chamo</title>
 
     <!-- TODO: Include Angular from Bower components -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
@@ -13,20 +13,92 @@
     <link rel="stylesheet" href="demo.css">
   </head>
   <body ng-controller="demoController">
-    <div class="container">
-      <h1 class="text-muted">Demo</h1>
+  <a href="https://github.com/BarakChamo/ng-promise-status"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
-      <div class="usage row">
-        <h4>Simple usage</h4>
-        <p>This is a simple usage of the directive</p>
-        <pre>&lt;the-directive&gt;&lt;/the-directive&gt;</pre>
-        <h4>Results</h4>
-        <status-button ng-click="setSuccessPromise()" promise="successPromise">
-          <span>Good Status {{$value}}</span>
-        </status-button>
-        <status-button ng-click="setErrorPromise()" promise="errorPromise">
-          <span>Bad Status {{$value}}</span>
-        </status-button>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>ngPromiseStatus <small>promise-aware UI elements.</small></h1>
+        <br>
+        <h4>A collection of Angular.js promise-aware directives and UI elements for your project </h4>
+        <h4 class="text-muted">by Barak Chamo</h4>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">          
+            <p class="lead">ngPromiseStatus is a collection (starting with statusButton) of promise-aware Angular directives that make it easy to bind UI elements to the progress and eventual outcome of a promise.</p>
+
+            <!-- Examples -->
+            <h1 class>Examples</h1>
+
+            <h3 class="page-header">statusButton</h3>
+            <h4>Simple usage</h4>
+            <p>This is a simplest use of the directive with only a promise (or array of) passed.</p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setSuccessPromise()" promise="successPromise">
+                    <span>Successful Promise</span>
+                  </status-button>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setErrorPromise()" promise="errorPromise">
+                    <span>Failed Promise</span>
+                  </status-button>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setErrorPromise()" promise="errorPromise">
+                    <span>Not a promise (immediate resolve)</span>
+                  </status-button>
+                </div>
+              </div>
+            </div>
+
+            <br>
+
+            <h4>Custom Status Classes</h4>
+            <p>You can pass custom classes to be applied for each stage of the promise (progress, succcess and error)</p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setSuccessPromise()" promise="successPromise" options="bootstrapConfig"class="btn">
+                    <span>Good Status {{$value}}</span>
+                  </status-button>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapConfig"class="btn">
+                    <span>Bad Status {{$value}}</span>
+                  </status-button>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapConfig"class="btn">
+                    <span>Bad Status {{$value}}</span>
+                  </status-button>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Start Documentation -->
+            <h1 class>Documentation</h1>
+            
+            <!-- Installation -->
+            <h3 class="page-header">Installation</h3>
+            <p>You can install through bower:</p>
+            <pre>bower install ng-promise-status</pre>
+            <p>or through npm:</p>
+            <pre>npm install ng-promise-status</pre>
+            <p>or <a href="https://github.com/BarakChamo/ng-promise-status">download the latest version from GitHub</a></p>
+
+            <!-- Setup -->
+            <h3 class="page-header">Setup</h3>
+            <p>To get started include ngPromiseStatus as a dependency in your angular app:</p>
+            <pre>var app = angular.module('myApp', ['ngPromiseStatus']);</pre>
+            <p>and you're good to go!</p>
+          </div>        
+        </div>
       </div>
     </div>
 
