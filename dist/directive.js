@@ -1,7 +1,7 @@
 /*!
  * ng-promise-status
  * 
- * Version: 0.0.1 - 2015-04-23T09:04:04.529Z
+ * Version: 0.0.1 - 2015-04-28T16:20:08.907Z
  * License: MIT
  */
 
@@ -97,10 +97,10 @@ angular.module('ngPromiseStatus', [])
         scope.$value   = value;
 
         // If done and delay is set, set a timeout to clear the class
-        if (scope.$config.delay > 0) {
+        if (scope.$config.delay > 0 && done) {
           $timeout(function(){
             scope.$status = 'idle';
-            scope.$class  = '';            
+            scope.$class  = scope.$config.idle_class;            
           }, scope.$config.delay);
         }
       }

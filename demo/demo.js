@@ -18,6 +18,14 @@ app.controller('demoController', ['$scope', '$q', '$timeout', function($scope, $
     idle_class:     'btn-default'
   };
 
+  $scope.bootstrapDelayConfig = {
+    success_class:  'btn-success',
+    error_class:    'btn-danger',
+    progress_class: 'btn-warning',
+    idle_class:     'btn-default',
+    delay: 2000
+  };
+
   // Create a new promise that will succeed in 3 seconds
   $scope.setSuccessPromise = function(){
     // Reassign $scope.promise with a new promise
@@ -33,18 +41,24 @@ app.controller('demoController', ['$scope', '$q', '$timeout', function($scope, $
     }, 3000);
   };
 
+  // Create a new promise that will succeed in 3 seconds
+  $scope.setValuePromise = function(){
+    // Reassign $scope.promise with a new promise
+    $scope.valuePromise = {value: 'this ain\'t a promise!'};
+  };
+
   // Create a new promise that will fail within 3 seconds
   $scope.setErrorPromise = function(){
     // Reassign $scope.promise with a new promise
     $scope.errorPromise = $q.defer();
 
     $scope.errorPromise.promise.then(function(){
-      console.log('Done from controller');
+      console.log('Error from controller');
     });
 
     // Set a timeout for 3 seconds and resolve the promise
     $timeout(function(){
-      $scope.errorPromise.reject('Some Error');
+      $scope.errorPromise.reject('Error!');
     }, 3000);
   };
 }]);

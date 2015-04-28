@@ -8,7 +8,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.js"></script>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
-
+    <link rel="stylesheet" href="../bower_components/google-code-prettify/bin/prettify.min.css"></script>
     <link rel="stylesheet" href="../dist/directive.css">
     <link rel="stylesheet" href="demo.css">
   </head>
@@ -35,68 +35,368 @@
 
             <h3 class="page-header">statusButton</h3>
             <h4>Simple usage</h4>
-            <p>This is a simplest use of the directive with only a promise (or array of) passed.</p>
+            <p>This is a simplest use of the directive with only a promise (or array of) passed (and some default styles).</p>
+            <br>
             <div class="container-fluid">
               <div class="row">
                 <div class="col-sm-4 text-center">
                   <status-button ng-click="setSuccessPromise()" promise="successPromise">
-                    <span>Successful Promise</span>
+                    <span>Success</span> 
                   </status-button>
                 </div>
                 <div class="col-sm-4 text-center">
                   <status-button ng-click="setErrorPromise()" promise="errorPromise">
-                    <span>Failed Promise</span>
+                    <span>Error</span> 
                   </status-button>
                 </div>
                 <div class="col-sm-4 text-center">
-                  <status-button ng-click="setErrorPromise()" promise="errorPromise">
-                    <span>Not a promise (immediate resolve)</span>
+                  <status-button ng-click="setValuePromise()" promise="valuePromise">
+                    <span>Value (immediate)</span>
                   </status-button>
                 </div>
               </div>
             </div>
 
-            <br>
+            <br><br>
 
             <h4>Custom Status Classes</h4>
-            <p>You can pass custom classes to be applied for each stage of the promise (progress, succcess and error)</p>
+            <p>You can pass custom classes to be applied for each stage of the promise (progress, succcess and error). It plays nicely with Bootstrap btn classes</p>
+            <br>
             <div class="container-fluid">
               <div class="row">
                 <div class="col-sm-4 text-center">
                   <status-button ng-click="setSuccessPromise()" promise="successPromise" options="bootstrapConfig"class="btn">
-                    <span>Good Status {{$value}}</span>
+                    <span>Success</span>
                   </status-button>
                 </div>
                 <div class="col-sm-4 text-center">
                   <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapConfig"class="btn">
-                    <span>Bad Status {{$value}}</span>
+                    <span>Error</span>
                   </status-button>
                 </div>
                 <div class="col-sm-4 text-center">
-                  <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapConfig"class="btn">
-                    <span>Bad Status {{$value}}</span>
+                  <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapDelayConfig"class="btn">
+                    <span>Error + Delay</span>
                   </status-button>
+                </div>
+              </div>
+            </div>
+
+            <br><br>
+
+            <h4>Promise Values</h4>
+            <p>The directive exposes several scope properties to the button's content (see docs). You can use them to give extra info on the promise's status.</p>
+            <br>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setSuccessPromise()" promise="successPromise" options="bootstrapConfig"class="btn">
+                    <span>Success {{$value}}</span>
+                  </status-button>
+                  <p><small class="text-muted">Resolved with value 'Done!'</small></p>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapConfig"class="btn">
+                    <span>Error {{$value}}</span>
+                  </status-button>
+                  <p><small class="text-muted">Rejected with error 'Error!'</small></p>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapDelayConfig"class="btn">
+                    <span>Error + Delay {{$value}}</span>
+                  </status-button>
+                  <p><small class="text-muted">Rejected with error 'error!'</small></p>
                 </div>
               </div>
             </div>
 
 
             <!-- Start Documentation -->
+            <br><br>
             <h1 class>Documentation</h1>
             
             <!-- Installation -->
             <h3 class="page-header">Installation</h3>
             <p>You can install through bower:</p>
-            <pre>bower install ng-promise-status</pre>
+            <pre class="prettyprint">bower install ng-promise-status</pre>
             <p>or through npm:</p>
-            <pre>npm install ng-promise-status</pre>
+            <pre class="prettyprint">npm install ng-promise-status</pre>
             <p>or <a href="https://github.com/BarakChamo/ng-promise-status">download the latest version from GitHub</a></p>
 
             <!-- Setup -->
             <h3 class="page-header">Setup</h3>
             <p>To get started include ngPromiseStatus as a dependency in your angular app:</p>
-            <pre>var app = angular.module('myApp', ['ngPromiseStatus']);</pre>
+            <pre class="prettyprint">var app = angular.module('myApp', ['ngPromiseStatus']);</pre>
             <p>and you're good to go!</p>
+
+            <!-- statusButton Usage -->
+            <h3 class="page-header">statusButton</h3>
+            <h4>Basic Use</h4>
+            <p>The <code>statusButton</code> directive can be used by simply using the directive as a tag or attribute and passing a promise (or array of).</p>
+            <p>When the button is clicked an internal handler is fired and assigns a promise handler to the assigned promise. Note that for that reason
+            new promises are only detected on click.</p>
+            <p>Any <code>ng-click</code> handler assigned to the element will be called before the internal handler so you can easily use the same <code>'click'</code> event to both assign a promise in your controller and for it to be detected by the button.</p>
+
+            <!-- Code example -->
+            <p><strong>Here's an example:</strong></p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4">
+                  <p>Result:</p>
+                  <div class="usage text-center">
+                    <status-button ng-click="setSuccessPromise()" promise="successPromise">
+                      <span>Success</span> 
+                    </status-button>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <p>Template:</p>
+                  <pre class="prettyprint">
+&lt;status-button 
+  ng-click=&quot;setSuccessPromise()&quot; 
+  promise=&quot;successPromise&quot;&gt;
+  &lt;span&gt;Success&lt;/span&gt; 
+&lt;/status-button&gt;
+                  </pre>
+                  <p>Controller:</p>
+                  <pre class="prettyprint">
+// Create a new promise that will succeed in 3 seconds
+$scope.setSuccessPromise = function(){
+  // Set $scope.promise with a new promise
+  $scope.successPromise = $q.defer();
+
+  // React to promise in controller
+  $scope.successPromise
+    .promise
+    .then(function(){
+      console.log('Done from controller');
+    });
+
+  // Set a timeout for 3 seconds and resolve
+  $timeout(function(){
+    $scope.successPromise.resolve('Done!');
+  }, 3000);
+};
+                  </pre>
+                </div>
+              </div>
+            </div>
+            <!-- /- end code samle -->
+            
+            <br>
+
+            <!-- Multiple Promises -->
+            <h4>Multiple Promises (and other valid inputs)</h4>
+            <p>The directive is built to work with multiple type of inputs:</p>
+            <dl class="dl-horizontal">
+              <dt>promises</dt>
+              <dd>The <code>promise</code> from a <code>$q.defer()</code>.</dd>
+              <dt>deffers</dt>
+              <dd>The <code>deffered</code> itself, saves the need of saving multiple references on scope.</dd>
+              <dt>promise arrays</dt>
+              <dd>An array of promises or deffereds.</dd>
+              <dt>other values</dt>
+              <dd>Any other value will not break but rather resolve immediately (implements <code>$q.when</code>).</dd>
+            </dl>
+            <!-- End Multiple Promises -->
+
+            <br>
+
+            <!-- Custom Configuration -->
+            <h4>CSS Classes</h4>
+            <p>By default, the directive applies 4 classes to the button depending on the state of the promise:</p>
+            <dl class="dl-horizontal">
+              <dt><code>idle</code></dt>
+              <dd>There is no current promise in progress.</dd>
+              <br>
+              <dt><code>inprogress</code></dt>
+              <dd>There promise is still in progress, <code>inprogress</code> is used instead of <code>progress</code> so that it doesn't clash with Bootstrap progress bars.</dd>
+              <br>
+              <dt><code>success</code></dt>
+              <dd>The promise was resolved.</dd>
+              <br>
+              <dt><code>error</code></dt>
+              <dd>The promise was rejected.</dd>
+            </dl>
+            
+            <p>ngPromiseStatus intentionally doesn't rely on any additional CSS files or required styling. It provides an easy interface in the form of class management that allows you to easy interact with promises using your existing styles and with no additional bloat to your project.</p>
+
+            <br>
+
+            <!-- Custom Configuration -->
+            <h4>Custom Configuration</h4>
+            <p>You can configure a few key features of statusButton - classes applied on promise stages, delay and disable:</p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>type</th>
+                  <th>default</th>
+                  <th>details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>idle_class</code></td>
+                  <td><span class="label label-primary">string</span></td>
+                  <td><code>idle</code></td>
+                  <td>The initial class applied to the button and will applied after completion if a delay is specified.</td>
+                </tr>
+                <tr>
+                  <td><code>progress_class</code></td>
+                  <td><span class="label label-primary">string</span></td>
+                  <td><code>inprogress</code></td>
+                  <td>The class that will be applied to the button whenever a promise is in progress.</td>
+                </tr>
+                <tr>
+                  <td><code>success_class</code></td>
+                  <td><span class="label label-primary">string</span></td>
+                  <td><code>success</code></td>
+                  <td>The class that will be applied to the button when a promise is resolved (completed successfully).</td>
+                </tr>
+                <tr>
+                  <td><code>error_class</code></td>
+                  <td><span class="label label-primary">string</span></td>
+                  <td><code>error</code></td>
+                  <td>The class that will be applied to the button when a promise is rejected (resulted in an error).</td>
+                </tr>
+                <tr>
+                  <td><code>progress_disable</code></td>
+                  <td><span class="label label-default">boolean</span></td>
+                  <td><code>true</code></td>
+                  <td>A toggle that determines if the button will be disabled when a promise is in progress.</td>
+                </tr>
+                <tr>
+                  <td><code>delay</code></td>
+                  <td><span class="label label-info">number</span></td>
+                  <td><code>0</code></td>
+                  <td>The time (in milliseconds) it takes for the button to return to idle state upon promise completion (either success or error). 0 will not return to idle.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- custom configuration example example -->
+            <p><strong>Here's an example for custom configuration using Bootstrap classes and a 2s delay:</strong></p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4">
+                  <p>Result:</p>
+                  <div class="usage text-center">
+                    <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapDelayConfig"class="btn">
+                      <span>Custom + Delay</span>
+                    </status-button>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <p>Template:</p>
+                  <pre class="prettyprint">
+&lt;status-button 
+  ng-click=&quot;setButtonPromise()&quot; 
+  promise=&quot;buttonPromise&quot;&gt;
+  options=&quot;buttonPromise&quot;&gt;
+  &lt;span&gt;Success&lt;/span&gt; 
+&lt;/status-button&gt;
+                  </pre>
+                  <p>Controller:</p>
+                  <pre class="prettyprint">
+// Define your custom configuration
+$scope.buttonConfig = {
+  success_class:  'btn-success',
+  error_class:    'btn-danger',
+  progress_class: 'btn-warning',
+  idle_class:     'btn-default',
+  delay:          2000
+};
+
+// Create a new promise that will succeed in 3 seconds
+$scope.setButtonPromise = function(){
+  // Set $scope.promise with a new promise
+  $scope.buttonPromise = $q.defer();
+
+  // React to promise in controller
+  $scope.buttonPromise
+    .promise
+    .then(function(){
+      console.log('Done from controller');
+    });
+
+  // Set a timeout for 3 seconds and reject
+  $timeout(function(){
+    $scope.buttonPromise.reject();
+  }, 3000);
+};
+                  </pre>
+                </div>
+              </div>
+            </div>
+            <!-- /- end code sample -->
+
+              <br>
+
+            <!-- Scope Properties -->
+            <h4>Scope Properties</h4>
+            <p>The directive exposes special scope properties to the button's content that allow you to customize the button's content and interact with the promise's values and state.</p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>type</th>
+                  <th>details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>$status</code></td>
+                  <td><span class="label label-primary">string</span></td>
+                  <td>The status of the promise, same as the default class names: <code>idle</code>, <code>inprogress</code>, <code>success</code> and <code>error</code></td>
+                </tr>
+                <tr>
+                  <td><code>$value</code></td>
+                  <td><span class="label label-warning">any</span></td>
+                  <td>Whatever value is passed upon resolution or rejection of the promise. If an array of promises is used, <code>$value</code> will be an ordered array of said whatevers.</td>
+                </tr>
+                <tr>
+                  <td><code>$done</code></td>
+                  <td><span class="label label-default">boolean</span></td>
+                  <td>A convenience boolean that indicates if a promise is in progress.</td>
+                </tr>
+                <tr>
+                  <td><code>$class</code></td>
+                  <td><span class="label label-primary">string</span></td>
+                  <td>The class that is currently applied, overwritten with your custom configuration if provided.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- scope properties example -->
+            <p><strong>Here's an example of using scope properties inside the button (promise is rejected with 'Error!'):</strong></p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4">
+                  <p>Result:</p>
+                  <div class="usage text-center">
+                    <status-button ng-click="setErrorPromise()" promise="errorPromise" options="bootstrapDelayConfig"class="btn">
+                      <span>What's up? {{$value}}</span>
+                    </status-button>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <p>Template:</p>
+                  <pre class="prettyprint" ng-non-bindable>
+&lt;status-button 
+  ng-click=&quot;setButtonPromise()&quot; 
+  promise=&quot;buttonPromise&quot; 
+  options=&quot;bootstrapConfig&quot;&gt;
+  &lt;span&gt;Success {{$value}}&lt;/span&gt;
+&lt;/status-button&gt;
+                  </pre>
+                </div>
+              </div>
+            </div>
+            <!-- /- end code sample -->
+
+            <!-- End Scope Properties -->
+            
           </div>        
         </div>
       </div>
@@ -104,5 +404,11 @@
 
     <script src="../dist/directive.js"></script>
     <script src="demo.js"></script>
+    <script src="../bower_components/google-code-prettify/bin/prettify.min.js"></script>
+    <script>
+      (function(){
+        prettyPrint();
+      })();
+    </script>
   </body>
 </html>

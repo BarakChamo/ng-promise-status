@@ -3,3 +3,64 @@
   border: 1px solid rgba(0,0,0,0.09);
   border-radius: 5px;
 }
+
+
+/*Force prettyprint styles*/
+pre.prettyprint {
+  padding: 10px !important;
+  border-color: #ccc !important;
+}
+
+/* Common button behavior */
+button {
+  transition: all 0.2s;
+  will-change: all;
+}
+
+/*Default status-button usage demo styles*/
+
+button:not(.btn){
+  padding: 5px 15px;
+}
+
+button.idle {
+  background: white;
+  border: 1px solid #F5F5F5;
+  border-radius: 1em;
+}
+
+button.idle:hover {
+  background: #F5F5F5;
+  border: 1px solid #eee;
+  border-radius: 1em;
+}
+
+button.success {
+  background: #8BC34A;
+  border: 1px solid #7CB342;
+  border-radius: 1em;
+  color:white;
+}
+
+button.success:hover {
+  background: #7CB342;
+  border: 1px solid #689F38;
+}
+
+button.error {
+  background: #F44336;
+  border: 1px solid #7CB342;
+  border-radius: 1em;
+  color:white;
+}
+
+button.error:hover {
+  background: #F44336;
+  border: 1px solid #7CB342;
+}
+
+button.inprogress {
+  background: #FFF9C4;
+  border: 1px solid #FFF59D;
+  border-radius: 1em;
+}
