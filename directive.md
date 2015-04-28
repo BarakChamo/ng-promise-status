@@ -14,7 +14,7 @@ bower install ng-promise-status
 
 Add it as a dependency to your app and then use the directive in your HTML files.
 
-More documentation and examples coming soon.
+For examples and documentation [check out the project page](http://barakchamo.github.io/ng-promise-status).
 
 ### Development
 
