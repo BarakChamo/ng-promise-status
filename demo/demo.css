@@ -17,6 +17,7 @@ button {
   will-change: all;
 }
 
+
 /*Default status-button usage demo styles*/
 
 button:not(.btn){
@@ -63,4 +64,12 @@ button.inprogress {
   background: #FFF9C4;
   border: 1px solid #FFF59D;
   border-radius: 1em;
+}
+
+
+/*Default status-bar usage demo styles*/
+
+/*Hide idle alerts*/
+.alert.idle {
+  display: none;
 }

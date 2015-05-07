@@ -1,6 +1,6 @@
 {
   "name": "ng-promise-status",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A collection of promise-aware Angular.js directives and UI elements",
   "repository": "git@github.com:BarakChamo/ng-promise-status.git",
   "main": "dist/directive.js",
