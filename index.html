@@ -25,7 +25,7 @@
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://barakchamo.github.io/ng-promise-status" data-text="ngPromiseStatus - promise-aware Angular components" data-via="BarakChamo">Tweet</a>
 
         &nbsp;
-        
+
         <div class="g-plusone" data-size="medium" data-href="http://barakchamo.github.io/ng-promise-status"></div>
         </div>
       </div>
@@ -34,7 +34,7 @@
     <div class="container">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-8 col-md-offset-2">          
+          <div class="col-md-8 col-md-offset-2">
             <p class="lead">ngPromiseStatus is a collection (starting with statusButton) of promise-aware Angular directives that make it easy to bind UI elements to the progress and eventual outcome of a promise.</p>
 
             <!-- Examples -->
@@ -43,18 +43,18 @@
             <h3 class="page-header" id="statusButtonExamples">statusButton <small class="text-muted"><a href="#statusButtonDocs">read the docs</a></small></h3>
 
             <h4>Simple usage</h4>
-            <p>This is a simplest use of the directive with only a promise (or array of) passed (and some default styles). <small><a href="#values">See valid values for promises</a></small></p>
+            <p>This is the simplest use of the directive, with only a promise (or array of) passed (and some default styles). <small><a href="#values">See valid values for promises</a></small></p>
             <br>
             <div class="container-fluid">
               <div class="row">
                 <div class="col-sm-4 text-center">
                   <status-button ng-click="setSuccessPromise()" promise="successPromise">
-                    <span>Success</span> 
+                    <span>Success</span>
                   </status-button>
                 </div>
                 <div class="col-sm-4 text-center">
                   <status-button ng-click="setErrorPromise()" promise="errorPromise">
-                    <span>Error</span> 
+                    <span>Error</span>
                   </status-button>
                 </div>
                 <div class="col-sm-4 text-center">
@@ -93,7 +93,7 @@
             <br><br>
 
             <h4>Promise Values</h4>
-            <p>The directive exposes several scope properties to the button's content (see docs). You can use them to give extra info on the promise's status.</p>
+            <p>The directive exposes several scope properties to the button's content (<a href="#scope">see docs</a>). You can use them to give extra info on the promise's status.</p>
             <br>
             <div class="container-fluid">
               <div class="row">
@@ -117,7 +117,7 @@
                 </div>
               </div>
             </div>
-            
+
             <br><br>
 
             <!-- Status bar examples -->
@@ -136,14 +136,14 @@
                   </status-button>
 
                   <p><small>I'm here, trigger the success button above.</small></p>
-                  
+
                   <status-bar promise="alertSuccessPromise" class="alert" options="alertConfig">
                     <span ng-switch="$status">
-                      <strong ng-switch-when="inprogress">Wait for it...</strong> 
-                      <strong ng-switch-when="success">Woohoo!</strong> 
-                      <strong ng-switch-when="error">Bummer...</strong> 
+                      <strong ng-switch-when="inprogress">Wait for it...</strong>
+                      <strong ng-switch-when="success">Woohoo!</strong>
+                      <strong ng-switch-when="error">Bummer...</strong>
                       {{$value}}
-                    </span> 
+                    </span>
                   </status-bar>
                 </div>
 
@@ -153,14 +153,14 @@
                   </status-button>
 
                   <p><small>Me too, trigger the error button above.</small></p>
-                  
+
                   <status-bar promise="alertErrorPromise" class="alert" options="alertConfig">
                     <span ng-switch="$status">
-                      <strong ng-switch-when="inprogress">Wait for it...</strong> 
-                      <strong ng-switch-when="success">Woohoo!</strong> 
-                      <strong ng-switch-when="error">Bummer...</strong> 
+                      <strong ng-switch-when="inprogress">Wait for it...</strong>
+                      <strong ng-switch-when="success">Woohoo!</strong>
+                      <strong ng-switch-when="error">Bummer...</strong>
                       {{$value}}
-                    </span> 
+                    </span>
                   </status-bar>
                 </div>
 
@@ -170,14 +170,14 @@
                   </status-button>
 
                   <p><small>This one is for a value promise, try the button in the first row.</small></p>
-                  
+
                   <status-bar promise="alertValuePromise" class="alert" options="alertConfig">
                     <span ng-switch="$status">
-                      <strong ng-switch-when="inprogress">Wait for it...</strong> 
-                      <strong ng-switch-when="success">Woohoo!</strong> 
-                      <strong ng-switch-when="error">Bummer...</strong> 
+                      <strong ng-switch-when="inprogress">Wait for it...</strong>
+                      <strong ng-switch-when="success">Woohoo!</strong>
+                      <strong ng-switch-when="error">Bummer...</strong>
                       {{$value}}
-                    </span> 
+                    </span>
                   </status-bar>
                 </div>
               </div>
@@ -186,7 +186,7 @@
             <!-- Start Documentation -->
             <br><br>
             <h1 class>Documentation</h1>
-            
+
             <!-- Installation -->
             <h3 class="page-header">Installation</h3>
             <p>You can install through bower:</p>
@@ -197,7 +197,7 @@
 
             <!-- Setup -->
             <h3 class="page-header">Setup</h3>
-            <p>To get started include ngPromiseStatus as a dependency in your angular app:</p>
+            <p>To get started, include ngPromiseStatus as a dependency in your angular app:</p>
             <pre class="prettyprint">var app = angular.module('myApp', ['ngPromiseStatus']);</pre>
             <p>and you're good to go!</p>
 
@@ -238,7 +238,7 @@
               <dt><code>error</code></dt>
               <dd>The promise was rejected.</dd>
             </dl>
-            
+
             <p>ngPromiseStatus intentionally doesn't rely on any additional CSS files or required styling. It provides an easy interface in the form of class management that allows you to easy interact with promises using your existing styles and with no additional bloat to your project.</p>
 
             <br>
@@ -296,17 +296,17 @@
                   <p>Result:</p>
                   <div class="usage text-center">
                     <status-button ng-click="setSuccessPromise()" promise="successPromise">
-                      <span>Success</span> 
+                      <span>Success</span>
                     </status-button>
                   </div>
                 </div>
                 <div class="col-sm-8">
                   <p>Template:</p>
                   <pre class="prettyprint">
-&lt;status-button 
-  ng-click=&quot;setSuccessPromise()&quot; 
+&lt;status-button
+  ng-click=&quot;setSuccessPromise()&quot;
   promise=&quot;successPromise&quot;&gt;
-  &lt;span&gt;Success&lt;/span&gt; 
+  &lt;span&gt;Success&lt;/span&gt;
 &lt;/status-button&gt;
                   </pre>
                   <p>Controller:</p>
@@ -353,25 +353,25 @@ $scope.setSuccessPromise = function(){
                   <td><code>idle_class</code></td>
                   <td><span class="label label-primary">string</span></td>
                   <td><code>idle</code></td>
-                  <td>The initial class applied to the button and will applied after completion if a delay is specified.</td>
+                  <td>The initial class applied to the button. Will be applied after completion if a delay is specified.</td>
                 </tr>
                 <tr>
                   <td><code>progress_class</code></td>
                   <td><span class="label label-primary">string</span></td>
                   <td><code>inprogress</code></td>
-                  <td>The class that will be applied to the button whenever a promise is in progress.</td>
+                  <td>The class applied to the button when a promise is in progress.</td>
                 </tr>
                 <tr>
                   <td><code>success_class</code></td>
                   <td><span class="label label-primary">string</span></td>
                   <td><code>success</code></td>
-                  <td>The class that will be applied to the button when a promise is resolved (completed successfully).</td>
+                  <td>The class applied to the button when a promise is resolved (completed successfully).</td>
                 </tr>
                 <tr>
                   <td><code>error_class</code></td>
                   <td><span class="label label-primary">string</span></td>
                   <td><code>error</code></td>
-                  <td>The class that will be applied to the button when a promise is rejected (resulted in an error).</td>
+                  <td>The class applied to the button when a promise is rejected (resulted in an error).</td>
                 </tr>
                 <tr>
                   <td><code>progress_disable</code></td>
@@ -403,11 +403,11 @@ $scope.setSuccessPromise = function(){
                 <div class="col-sm-8">
                   <p>Template:</p>
                   <pre class="prettyprint">
-&lt;status-button 
-  ng-click=&quot;setButtonPromise()&quot; 
+&lt;status-button
+  ng-click=&quot;setButtonPromise()&quot;
   promise=&quot;buttonPromise&quot;&gt;
   options=&quot;buttonPromise&quot;&gt;
-  &lt;span&gt;Success&lt;/span&gt; 
+  &lt;span&gt;Success&lt;/span&gt;
 &lt;/status-button&gt;
                   </pre>
                   <p>Controller:</p>
@@ -464,9 +464,9 @@ $scope.setButtonPromise = function(){
                 <div class="col-sm-8">
                   <p>Template:</p>
                   <pre class="prettyprint" ng-non-bindable>
-&lt;status-button 
-  ng-click=&quot;setButtonPromise()&quot; 
-  promise=&quot;buttonPromise&quot; 
+&lt;status-button
+  ng-click=&quot;setButtonPromise()&quot;
+  promise=&quot;buttonPromise&quot;
   options=&quot;bootstrapConfig&quot;&gt;
   &lt;span&gt;Success {{$value}}&lt;/span&gt;
 &lt;/status-button&gt;
@@ -484,7 +484,7 @@ $scope.setButtonPromise = function(){
             <h3 class="page-header" id="statusBarDocs">statusBar <small class="text-muted"><a href="#statusBarExamples">see some examples</a></small></h3>
             <p>Just like the <code>statusButton</code>, the <code>statusBar</code> directive can be easily put to work as a tag or attribute and passing a promise (or array of). <small><a href="#values">See valid values for promises</a></small></p>
             <p>When a promise is set and re-set a promise handler is assigned. This is managed by watching the promise passed but other hooks will soon be implemented.</p>
-                
+
             <br>
 
             <!-- Custom Configuration -->
@@ -553,9 +553,9 @@ $scope.setButtonPromise = function(){
                   <p>Result:</p>
                   <div class="usage text-center">
                     <status-button ng-click="setExamplePromise()" promise="examplePromise">
-                      <span>Give it a go!</span> 
+                      <span>Give it a go!</span>
                     </status-button>
-                    
+
                     <br><br>
 
                     <small>
@@ -564,11 +564,11 @@ $scope.setButtonPromise = function(){
 
                     <status-bar promise="examplePromise" class="alert" options="alertConfig">
                       <span ng-switch="$status">
-                        <strong ng-switch-when="inprogress">Wait for it...</strong> 
-                        <strong ng-switch-when="success">Woohoo!</strong> 
-                        <strong ng-switch-when="error">Bummer...</strong> 
+                        <strong ng-switch-when="inprogress">Wait for it...</strong>
+                        <strong ng-switch-when="success">Woohoo!</strong>
+                        <strong ng-switch-when="error">Bummer...</strong>
                         {{$value}}
-                      </span> 
+                      </span>
                     </status-bar>
                   </div>
                 </div>
@@ -576,37 +576,37 @@ $scope.setButtonPromise = function(){
                   <p>Bar Template:</p>
                   <pre class="prettyprint" ng-non-bindable>
 &lt;status-bar class=&quot;alert&quot;
-  promise=&quot;examplePromise&quot; 
+  promise=&quot;examplePromise&quot;
   options=&quot;alertConfig&quot;&gt;
   &lt;span ng-switch=&quot;$status&quot;&gt;
     &lt;strong ng-switch-when=&quot;inprogress&quot;&gt;
       Wait for it...
-    &lt;/strong&gt; 
+    &lt;/strong&gt;
     &lt;strong ng-switch-when=&quot;success&quot;&gt;
       Woohoo!
-    &lt;/strong&gt; 
+    &lt;/strong&gt;
     &lt;strong ng-switch-when=&quot;error&quot;&gt;
       Bummer...
-    &lt;/strong&gt; 
-    
+    &lt;/strong&gt;
+
     {{$value}}
-  &lt;/span&gt; 
+  &lt;/span&gt;
 &lt;/status-bar&gt;
                   </pre>
 
                   <p>Button Template:</p>
                   <pre class="prettyprint">
-&lt;status-button 
-  ng-click=&quot;setExamplePromise()&quot; 
+&lt;status-button
+  ng-click=&quot;setExamplePromise()&quot;
   promise=&quot;examplePromise&quot;&gt;
-  &lt;span&gt;Give it a go!&lt;/span&gt; 
+  &lt;span&gt;Give it a go!&lt;/span&gt;
 &lt;/status-button&gt;
                   </pre>
                 </div>
               </div>
             </div>
             <!-- /- end code samle -->
-          </div>        
+          </div>
         </div>
       </div>
     </div>
