@@ -1,7 +1,7 @@
 /*!
  * ng-promise-status
  * 
- * Version: 0.1.1 - 2015-05-07T10:40:47.345Z
+ * Version: 0.1.2 - 2015-05-29T19:38:18.906Z
  * License: MIT
  */
 
