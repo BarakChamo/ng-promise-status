@@ -5,7 +5,15 @@ module.exports = function(config) {
     basePath: '',
 
     // Frameworks to use
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'commonjs'],
+
+    preprocessors: {
+      '**/*.js': ['commonjs']
+    },
+
+    commonjsPreprocessor: {
+      modulesRoot: 'dist'
+    },
 
     // List of files / patterns to load in the browser
     files: [
