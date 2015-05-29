@@ -1,11 +1,12 @@
 /*!
  * ng-promise-status
  * 
- * Version: 0.1.2 - 2015-05-29T19:38:18.906Z
+ * Version: 0.1.2 - 2015-05-29T19:47:22.016Z
  * License: MIT
  */
 
 
+(function (angular) {
 'use strict';
 
 angular.module('ngPromiseStatus', [])
@@ -253,3 +254,4 @@ angular.module('ngPromiseStatus', [])
 }])
 ;
 angular.module("ngPromiseStatus").run(["$templateCache", function($templateCache) {$templateCache.put("directive.html","<button class=\"status-button\" ng-click=\"; statusButtonClick($event)\" ng-class=\"$class\" ng-disabled=\"$config.progress_disable && $status === \'inprogress\'\"></button>");}]);
+})((typeof exports !== 'undefined' || typeof module !== 'undefined' && module.exports) ? require('angular') : angular);

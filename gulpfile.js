@@ -1,4 +1,4 @@
-/* global require */ 
+/* global require, __dirname */ 
 "use strict";
 
 var fs = require('fs');
@@ -20,6 +20,7 @@ var plumber = require('gulp-plumber');
 var open = require('gulp-open');
 var less = require('gulp-less');
 var order = require("gulp-order");
+var wrapper = require("gulp-wrapper");
 
 
 var config = {
@@ -65,7 +66,7 @@ gulp.task('scripts', function() {
              quotes: true
             }))
       .pipe(templateCache({module: 'ngPromiseStatus'}));
-  };
+  }
 
   function buildDistJS(){
     return gulp.src('src/directive.js')
@@ -75,7 +76,7 @@ gulp.task('scripts', function() {
       .pipe(jshint())
       .pipe(jshint.reporter('jshint-stylish'))
       .pipe(jshint.reporter('fail'));
-  };
+  }
 
   es.merge(buildDistJS(), buildTemplates())
     .pipe(plumber({
@@ -86,10 +87,14 @@ gulp.task('scripts', function() {
       'template.js'
     ]))
     .pipe(concat('directive.js'))
+    .pipe(wrapper({
+      header: '(function (angular) {\n',
+      footer: "\n})((typeof exports !== 'undefined' || typeof module !== 'undefined' && module.exports) ? require('angular') : angular);\n"
+    }))
     .pipe(header(config.banner, {
       timestamp: (new Date()).toISOString(), pkg: config.pkg
     }))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('./dist'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify({preserveComments: 'some'}))
     .pipe(gulp.dest('./dist'))
@@ -104,10 +109,10 @@ gulp.task('styles', function() {
     .pipe(header(config.banner, {
       timestamp: (new Date()).toISOString(), pkg: config.pkg
     }))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('./dist'))
     .pipe(minifyCSS())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('./dist'))
     .pipe(connect.reload());
 });
 
@@ -118,7 +123,7 @@ gulp.task('open', function(){
 
 gulp.task('jshint-test', function(){
   return gulp.src('./test/**/*.js').pipe(jshint());
-})
+});
 
 gulp.task('karma', function (done) {
   karma.start({
@@ -136,7 +141,7 @@ gulp.task('karma-serve', function(done){
 function handleError(err) {
   console.log(err.toString());
   this.emit('end');
-};
+}
 
 gulp.task('build', ['clean', 'scripts', 'styles']);
 gulp.task('serve', ['build', 'connect', 'watch', 'open']);
